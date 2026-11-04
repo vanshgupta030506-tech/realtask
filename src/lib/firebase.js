@@ -12,9 +12,10 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-export const firebaseApp = initializeApp(firebaseConfig);
-export const db = getFirestore(firebaseApp);
-export const auth = getAuth(firebaseApp);
+export const firebaseEnabled = Boolean(firebaseConfig.projectId && firebaseConfig.apiKey && firebaseConfig.appId);
+export const firebaseApp = firebaseEnabled ? initializeApp(firebaseConfig) : null;
+export const db = firebaseApp ? getFirestore(firebaseApp) : null;
+export const auth = firebaseApp ? getAuth(firebaseApp) : null;
 
 // Shared Firestore shape for every frontend:
 // users/{uid}, tasks/{taskId}, classes/{classId}, roadmaps/{roadmapId}

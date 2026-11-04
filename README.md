@@ -14,6 +14,8 @@ The Firebase client config is read from environment variables. Add the Sarvam ke
 
 Authentication supports Google and email/password. In Firebase Console, open Authentication → Sign-in method and enable Google and Email/Password before testing sign-in.
 
+The Assistant tab now scrolls directly to the chat on mobile. Chat requests go through `api/chat.js`, which calls Sarvam’s `/v1/chat/completions` endpoint using the `api-subscription-key` header. Add `SARVAM_API_KEY` in Vercel Project Settings → Environment Variables, then redeploy. Do not put this key in frontend code.
+
 ## Shared backend model
 
 All frontends should use the same Firestore collections: `users`, `tasks`, `classes`, and `roadmaps`. Tasks should carry `ownerId`, `title`, `type`, `startAt`, `dueAt`, `status`, and `sharedWith`. Firebase Security Rules should enforce owner access by default and explicit access through `sharedWith`.
